@@ -6,6 +6,7 @@ import { ArrowRight, Leaf, BarChart, Zap, Share2 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card, { CardContent, CardImage } from '../components/ui/Card';
+import dinesh from './assets/dinesh.jpg';
 
 const Home: React.FC = () => {
   return (
@@ -185,14 +186,14 @@ const Home: React.FC = () => {
               <div className="flex items-center">
                 <div className="w-16 h-16 rounded-full overflow-hidden mr-4">
                   <img 
-                    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                    alt="John Anderson"
+                    src={dinesh} 
+                    alt="Dinesh Sandaruwan"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg">John Anderson</h4>
-                  <p className="text-primary-300">Willow Creek Farms, California</p>
+                  <h4 className="font-semibold text-lg">Dinesh Sandaruwan</h4>
+                  <p className="text-primary-300">Walasmulla, Sri Lanka</p>
                 </div>
               </div>
             </div>
