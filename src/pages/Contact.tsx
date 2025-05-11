@@ -44,17 +44,17 @@ const Contact: React.FC = () => {
               {
                 icon: <MapPin size={24} className="text-primary-600" />,
                 title: "Visit Us",
-                details: ["123 Farm Road", "Agritown, AG 12345", "United States"]
+                details: ["AgroGo (pvt) Ltd", "Walasmulla", "Sri Lanka"]
               },
               {
                 icon: <Phone size={24} className="text-primary-600" />,
                 title: "Call Us",
-                details: ["Main: (123) 456-7890", "Support: (123) 456-7891", "Mon-Fri, 9am-5pm PST"]
+                details: ["Main: +94713357493", "Support: +94713357493", "Mon-Fri, 9am-5pm IST"]
               },
               {
                 icon: <Mail size={24} className="text-primary-600" />,
                 title: "Email Us",
-                details: ["info@agrogo.com", "support@agrogo.com", "sales@agrogo.com"]
+                details: ["agrogo@gmail.com"]
               }
             ].map((item, index) => (
               <motion.div 

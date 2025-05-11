@@ -14,7 +14,7 @@ import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/agro-go-web-app">
       <AnimatePresence mode="wait">
         <Routes>
           <Route path="/" element={<Layout />}>

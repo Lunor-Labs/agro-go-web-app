@@ -1,9 +1,9 @@
 {
   "name": "agrogo-website",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.6.0",
   "type": "module",
-  "homepage": "https://lunor-labs.github.io/agro-go-web-app",
+  "homepage": "https://Lunor-Labs.github.io/agro-go-web-app",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
