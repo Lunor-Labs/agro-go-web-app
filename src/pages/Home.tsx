@@ -6,7 +6,7 @@ import { ArrowRight, Leaf, BarChart, Zap, Share2 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card, { CardContent, CardImage } from '../components/ui/Card';
-import dinesh from './assets/dinesh.jpg';
+import dineshImage from '../assets/dinesh.jpg';
 
 const Home: React.FC = () => {
   return (
@@ -186,7 +186,7 @@ const Home: React.FC = () => {
               <div className="flex items-center">
                 <div className="w-16 h-16 rounded-full overflow-hidden mr-4">
                   <img 
-                    src={dinesh} 
+                    src={dineshImage} 
                     alt="Dinesh Sandaruwan"
                     className="w-full h-full object-cover"
                   />
