@@ -1,7 +1,7 @@
 {
   "name": "agrogo-website",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "type": "module",
   "homepage": "https://Lunor-Labs.github.io/agro-go-web-app",
   "scripts": {
