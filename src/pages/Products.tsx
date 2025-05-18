@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, ArrowRight } from 'lucide-react';
 
 import Button from '../components/ui/Button';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card, { CardContent, CardImage } from '../components/ui/Card';
+import ProductDetails from '../components/products/ProductDetails';
 
 // Product data
 const products = [
   {
     id: 1,
     name: "Organic Fertilizer - Premium Blend",
-    description: "A balanced mix of organic materials that enhance soil structure and provide essential nutrients for plant growth.",
+    description: "A balanced mix of organic materials that enhance soil structure and provide essential nutrients for plant growth. Our premium blend is specially formulated to improve soil fertility, increase crop yields, and promote sustainable agriculture practices.",
     image: "https://images.pexels.com/photos/4505161/pexels-photo-4505161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "fertilizers",
     price: 49.99,
@@ -20,7 +21,7 @@ const products = [
   {
     id: 2,
     name: "Smart Irrigation Controller",
-    description: "A weather-based irrigation controller that automatically adjusts watering schedules based on local weather conditions.",
+    description: "A weather-based irrigation controller that automatically adjusts watering schedules based on local weather conditions. Features include smartphone connectivity, real-time monitoring, and advanced water-saving algorithms.",
     image: "https://images.pexels.com/photos/3464727/pexels-photo-3464727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "equipment",
     price: 199.99,
@@ -29,7 +30,7 @@ const products = [
   {
     id: 3,
     name: "Drought-Resistant Corn Seeds",
-    description: "High-yield corn varieties specially bred to thrive in low-water conditions without compromising on output.",
+    description: "High-yield corn varieties specially bred to thrive in low-water conditions without compromising on output. These seeds are perfect for areas with limited rainfall or water restrictions.",
     image: "https://images.pexels.com/photos/547263/pexels-photo-547263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "seeds",
     price: 89.99,
@@ -38,7 +39,7 @@ const products = [
   {
     id: 4,
     name: "Soil Health Testing Kit",
-    description: "An easy-to-use kit for testing key soil parameters including pH, nitrogen, phosphorus, and potassium levels.",
+    description: "An easy-to-use kit for testing key soil parameters including pH, nitrogen, phosphorus, and potassium levels. Get professional-grade results in minutes to optimize your soil management strategy.",
     image: "https://images.pexels.com/photos/7728844/pexels-photo-7728844.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "tools",
     price: 79.99,
@@ -47,7 +48,7 @@ const products = [
   {
     id: 5,
     name: "Biological Pest Control Agents",
-    description: "Natural predators and parasites that target common crop pests without the need for chemical pesticides.",
+    description: "Natural predators and parasites that target common crop pests without the need for chemical pesticides. Our biological control agents are safe, effective, and environmentally friendly.",
     image: "https://images.pexels.com/photos/4350616/pexels-photo-4350616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "pest-control",
     price: 59.99,
@@ -56,7 +57,7 @@ const products = [
   {
     id: 6,
     name: "Hydroponic Growing System",
-    description: "Complete system for growing plants without soil, using mineral nutrient solutions in a water solvent.",
+    description: "Complete system for growing plants without soil, using mineral nutrient solutions in a water solvent. Includes all necessary components for successful hydroponic cultivation.",
     image: "https://images.pexels.com/photos/3735219/pexels-photo-3735219.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "equipment",
     price: 349.99,
@@ -65,7 +66,7 @@ const products = [
   {
     id: 7,
     name: "Cover Crop Seed Mix",
-    description: "A blend of legumes, grasses, and brassicas designed to improve soil health and prevent erosion between growing seasons.",
+    description: "A blend of legumes, grasses, and brassicas designed to improve soil health and prevent erosion between growing seasons. Perfect for sustainable farming practices.",
     image: "https://images.pexels.com/photos/4505170/pexels-photo-4505170.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "seeds",
     price: 39.99,
@@ -74,7 +75,7 @@ const products = [
   {
     id: 8,
     name: "Compost Accelerator",
-    description: "A microbial formula that speeds up the composting process, turning organic waste into nutrient-rich compost faster.",
+    description: "A microbial formula that speeds up the composting process, turning organic waste into nutrient-rich compost faster. Ideal for both small-scale and commercial composting operations.",
     image: "https://images.pexels.com/photos/4397885/pexels-photo-4397885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "fertilizers",
     price: 29.99,
@@ -83,7 +84,7 @@ const products = [
   {
     id: 9,
     name: "Precision Farming Drone",
-    description: "Equipped with multispectral sensors to monitor crop health, identify issues, and optimize treatment applications.",
+    description: "Equipped with multispectral sensors to monitor crop health, identify issues, and optimize treatment applications. Includes advanced imaging technology and automated flight planning.",
     image: "https://images.pexels.com/photos/2252311/pexels-photo-2252311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     category: "equipment",
     price: 1499.99,
@@ -104,6 +105,7 @@ const categories = [
 const Products: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showFilters, setShowFilters] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
   
   // Filter products based on selected category
   const filteredProducts = selectedCategory === "all" 
@@ -215,6 +217,7 @@ const Products: React.FC = () => {
                             variant="text" 
                             icon={<ArrowRight size={16} />} 
                             iconPosition="right"
+                            onClick={() => setSelectedProduct(product)}
                           >
                             Details
                           </Button>
@@ -234,6 +237,16 @@ const Products: React.FC = () => {
           </div>
         </div>
       </section>
+      
+      {/* Product Details Modal */}
+      <AnimatePresence>
+        {selectedProduct && (
+          <ProductDetails
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+          />
+        )}
+      </AnimatePresence>
       
       {/* CTA Section */}
       <section className="py-16 bg-primary-50">
