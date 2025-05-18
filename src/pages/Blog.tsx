@@ -5,6 +5,7 @@ import { Calendar, User, Clock, ChevronRight } from 'lucide-react';
 import SectionTitle from '../components/ui/SectionTitle';
 import BlogCard from '../components/blog/BlogCard';
 import { blogPosts } from '../data/blogPosts';
+import { Link } from "react-router-dom";
 
 // Categories
 const categories = [
@@ -84,10 +85,10 @@ const Blog: React.FC = () => {
                   whileHover={{ x: 10 }}
                   className="inline-flex items-center text-primary-600 font-medium"
                 >
-                  <a href={`/blog/${blogPosts[0].slug}`} className="flex items-center">
+                  <Link to={`/blog/${blogPosts[0].slug}`} className="flex items-center">
                     Read Article
                     <ChevronRight size={16} className="ml-2" />
-                  </a>
+                  </Link>
                 </motion.div>
               </div>
             </div>
