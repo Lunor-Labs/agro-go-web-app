@@ -1,80 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, User, Clock, ChevronRight } from 'lucide-react';
 
 import SectionTitle from '../components/ui/SectionTitle';
-import Card, { CardContent, CardImage } from '../components/ui/Card';
-import Button from '../components/ui/Button';
-
-// Blog post data
-const blogPosts = [
-  {
-    id: 1,
-    title: "Sustainable Farming Practices for the Modern Age",
-    excerpt: "Discover how modern sustainable farming techniques can increase productivity while reducing environmental impact.",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at magna non nunc tristique rhoncus. Aliquam nibh ante, egestas id dictum a, commodo rhoncus libero. Praesent eget tellus...",
-    image: "https://images.pexels.com/photos/2219420/pexels-photo-2219420.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    author: "Sarah Johnson",
-    date: "May 15, 2025",
-    readTime: "8 min read",
-    category: "Sustainability"
-  },
-  {
-    id: 2,
-    title: "Optimizing Irrigation: Water Conservation in Agriculture",
-    excerpt: "Learn about the latest technologies and methods for water conservation in agricultural irrigation systems.",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at magna non nunc tristique rhoncus. Aliquam nibh ante, egestas id dictum a, commodo rhoncus libero. Praesent eget tellus...",
-    image: "https://images.pexels.com/photos/1434818/pexels-photo-1434818.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    author: "Michael Chen",
-    date: "April 28, 2025",
-    readTime: "6 min read",
-    category: "Water Management"
-  },
-  {
-    id: 3,
-    title: "The Benefits of Organic Fertilizers for Soil Health",
-    excerpt: "Explore the long-term benefits of organic fertilizers on soil microbiology, structure, and overall crop health.",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at magna non nunc tristique rhoncus. Aliquam nibh ante, egestas id dictum a, commodo rhoncus libero. Praesent eget tellus...",
-    image: "https://images.pexels.com/photos/5528994/pexels-photo-5528994.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    author: "David Rodriguez",
-    date: "April 10, 2025",
-    readTime: "7 min read",
-    category: "Soil Management"
-  },
-  {
-    id: 4,
-    title: "Climate-Resilient Crop Varieties for Changing Weather Patterns",
-    excerpt: "How advanced breeding techniques are creating crop varieties that can withstand extreme weather conditions.",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at magna non nunc tristique rhoncus. Aliquam nibh ante, egestas id dictum a, commodo rhoncus libero. Praesent eget tellus...",
-    image: "https://images.pexels.com/photos/175805/pexels-photo-175805.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    author: "Emma Wilson",
-    date: "March 22, 2025",
-    readTime: "5 min read",
-    category: "Crop Science"
-  },
-  {
-    id: 5,
-    title: "Digital Farming: Leveraging Data for Better Agricultural Decisions",
-    excerpt: "How modern farmers are using data analytics, IoT devices, and AI to optimize their farming operations.",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at magna non nunc tristique rhoncus. Aliquam nibh ante, egestas id dictum a, commodo rhoncus libero. Praesent eget tellus...",
-    image: "https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    author: "James Martinez",
-    date: "March 8, 2025",
-    readTime: "9 min read",
-    category: "Technology"
-  },
-  {
-    id: 6,
-    title: "Regenerative Agriculture: Rebuilding Soil Health for Future Generations",
-    excerpt: "Discover the principles of regenerative agriculture and how it's transforming farming practices worldwide.",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at magna non nunc tristique rhoncus. Aliquam nibh ante, egestas id dictum a, commodo rhoncus libero. Praesent eget tellus...",
-    image: "https://images.pexels.com/photos/2252584/pexels-photo-2252584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    author: "Olivia Thompson",
-    date: "February 19, 2025",
-    readTime: "10 min read",
-    category: "Soil Management"
-  }
-];
+import BlogCard from '../components/blog/BlogCard';
+import { blogPosts } from '../data/blogPosts';
 
 // Categories
 const categories = [
@@ -88,6 +18,12 @@ const categories = [
 ];
 
 const Blog: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  
+  const filteredPosts = selectedCategory === "All"
+    ? blogPosts
+    : blogPosts.filter(post => post.category === selectedCategory);
+  
   return (
     <>
       {/* Hero Section */}
@@ -121,8 +57,8 @@ const Blog: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="h-64 lg:h-auto">
                 <img
-                  src="https://images.pexels.com/photos/2041774/pexels-photo-2041774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                  alt="Featured post"
+                  src={blogPosts[0].image}
+                  alt={blogPosts[0].title}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -131,26 +67,28 @@ const Blog: React.FC = () => {
                   Featured Article
                 </span>
                 <h2 className="text-3xl font-bold mb-4">
-                  The Future of Sustainable Agriculture: Balancing Productivity and Environmental Stewardship
+                  {blogPosts[0].title}
                 </h2>
                 <div className="flex items-center text-gray-500 text-sm mb-4">
                   <Calendar size={16} className="mr-1" />
-                  <span className="mr-4">June 1, 2025</span>
+                  <span className="mr-4">{blogPosts[0].date}</span>
                   <User size={16} className="mr-1" />
-                  <span className="mr-4">John Anderson</span>
+                  <span className="mr-4">{blogPosts[0].author.name}</span>
                   <Clock size={16} className="mr-1" />
-                  <span>12 min read</span>
+                  <span>{blogPosts[0].readTime}</span>
                 </div>
                 <p className="text-gray-600 mb-6">
-                  Explore how modern agricultural practices are evolving to meet the twin challenges of feeding a growing global population while preserving natural resources for future generations.
+                  {blogPosts[0].excerpt}
                 </p>
-                <Button 
-                  variant="primary" 
-                  icon={<ChevronRight size={16} />} 
-                  iconPosition="right"
+                <motion.div
+                  whileHover={{ x: 10 }}
+                  className="inline-flex items-center text-primary-600 font-medium"
                 >
-                  Read Article
-                </Button>
+                  <a href={`/blog/${blogPosts[0].slug}`} className="flex items-center">
+                    Read Article
+                    <ChevronRight size={16} className="ml-2" />
+                  </a>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -169,7 +107,7 @@ const Blog: React.FC = () => {
             {/* Main Content */}
             <div className="md:w-3/4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {blogPosts.map((post, index) => (
+                {filteredPosts.map((post, index) => (
                   <motion.div 
                     key={post.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -177,47 +115,9 @@ const Blog: React.FC = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                   >
-                    <Card hoverable>
-                      <CardImage 
-                        src={post.image} 
-                        alt={post.title}
-                        className="h-48"
-                      />
-                      <CardContent>
-                        <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-medium mb-3">
-                          {post.category}
-                        </span>
-                        <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                        <p className="text-gray-600 mb-4 text-sm">{post.excerpt}</p>
-                        <div className="flex items-center text-gray-500 text-xs mb-4">
-                          <Calendar size={14} className="mr-1" />
-                          <span className="mr-3">{post.date}</span>
-                          <Clock size={14} className="mr-1" />
-                          <span>{post.readTime}</span>
-                        </div>
-                        <Button 
-                          variant="text" 
-                          icon={<ChevronRight size={16} />} 
-                          iconPosition="right"
-                        >
-                          Read More
-                        </Button>
-                      </CardContent>
-                    </Card>
+                    <BlogCard post={post} />
                   </motion.div>
                 ))}
-              </div>
-              
-              {/* Pagination */}
-              <div className="flex justify-center mt-12">
-                <div className="flex space-x-2">
-                  <button className="w-10 h-10 flex items-center justify-center rounded-md bg-primary-600 text-white">1</button>
-                  <button className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-gray-100">2</button>
-                  <button className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-gray-100">3</button>
-                  <button className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-gray-100">
-                    <ChevronRight size={16} />
-                  </button>
-                </div>
               </div>
             </div>
             
@@ -231,7 +131,12 @@ const Blog: React.FC = () => {
                     {categories.map((category, index) => (
                       <button
                         key={index}
-                        className="block w-full text-left px-3 py-2 rounded-md transition-colors hover:bg-gray-100"
+                        className={`block w-full text-left px-3 py-2 rounded-md transition-colors ${
+                          selectedCategory === category
+                            ? 'bg-primary-100 text-primary-700'
+                            : 'hover:bg-gray-100'
+                        }`}
+                        onClick={() => setSelectedCategory(category)}
                       >
                         {category}
                       </button>
@@ -245,17 +150,18 @@ const Blog: React.FC = () => {
                   <p className="text-gray-600 text-sm mb-4">
                     Stay updated with our latest articles and agricultural tips.
                   </p>
-                  <form>
-                    <div className="mb-3">
-                      <input 
-                        type="email" 
-                        placeholder="Your email address" 
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      />
-                    </div>
-                    <Button variant="primary" fullWidth>
+                  <form className="space-y-3">
+                    <input 
+                      type="email" 
+                      placeholder="Your email address" 
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full bg-primary-600 text-white py-2 rounded-md hover:bg-primary-700 transition-colors"
+                    >
                       Subscribe
-                    </Button>
+                    </button>
                   </form>
                 </div>
               </div>

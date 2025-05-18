@@ -22,7 +22,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, onClose }) => 
     const message = encodeURIComponent(
       `Hi! I'm interested in ordering:\n\n` +
       `Product: ${product.name}\n` +
-      `Price: Rs ${product.price.toFixed(2)}\n` +
+      `Price: Rs${product.price.toFixed(2)}\n` +
       `Category: ${product.category}\n\n` +
       `Please provide more information about ordering this product.`
     );
