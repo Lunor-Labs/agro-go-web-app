@@ -53,9 +53,9 @@ export const blogPosts: BlogPost[] = [
   </section>
 </article>
     `,
-    image: "https://images.pexels.com/photos/2219420/pexels-photo-2219420.jpeg",
+    image: "https://images.pexels.com/photos/7299948/pexels-photo-7299948.jpeg",
     author: {
-      name: "Sarah Johnson",
+      name: "Dulanjalee",
       avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
     },
     date: "May 15, 2025",
@@ -96,9 +96,9 @@ export const blogPosts: BlogPost[] = [
       <h3>Future of Irrigation</h3>
       <p>As technology continues to advance, we can expect even more efficient irrigation solutions. Integration with AI and machine learning will further optimize water usage in agriculture.</p>
     `,
-    image: "https://images.pexels.com/photos/1434818/pexels-photo-1434818.jpeg",
+    image: "https://images.pexels.com/photos/27443421/pexels-photo-27443421/free-photo-of-sprinklers-watering-lawn-at-palace.jpeg",
     author: {
-      name: "Michael Chen",
+      name: "T Lakshan",
       avatar: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
     },
     date: "April 28, 2025",
